@@ -11,3 +11,4 @@ kaggle.json
 .venv/
 .DS_Store
 datasets/raw-data/
+.env
