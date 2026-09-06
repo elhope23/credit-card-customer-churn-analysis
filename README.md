@@ -1,12 +1,38 @@
 # Project XYZ
 
-**Project XYZ** is a comprehensive data analysis tool designed to streamline data exploration, analysis, and visualisation. The tool supports multiple data formats and provides an intuitive interface for both novice and expert data scientists.
+This project aims to analyse the factors contributing to whether a bank's credit card customer will churn or not. Beyond that, this project aims to present ethical considerations as a key component of this analysis.
 
 # ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
 ## Dataset Content
 
-* Describe your dataset. Choose a dataset of reasonable size to avoid exceeding the repository's 100GB limit.
+* The dataset I have chosen is [Credit Card Customers - Predicting Churning Customers](https://www.kaggle.com/datasets/sakshigoyal7/credit-card-customers/data) - a **CC0: Public Domain** dataset sourced from Kaggle. 
+
+* The data includes the following columns:
+
+| **Column Name** | **Description** |
+| --------------- | ---------------- |
+| `CLIENTNUM` | Unique client number identifier for the customer holding the account |
+| `Attrition_Flag` | Whether the customer is an `Existing Customer` or an `Attrited Customer` |
+| `Customer_Age` | Customer age in years |
+| `Gender` | The customer's gender |
+| `Dependent_count` | Number of dependents the customer has |
+| `Education_Level` | The highest level of education a customer holds |
+| `Marital_Status` | A customer's marital status |
+| `Income_Category` | Annual income of a customer broken down into categories |
+| `Card_Category` | The card product the customer holds |
+| `Months_on_book` | The number of months the customer has been with the bank |
+| `Total_Relationship_Count` | The total number of products held by the customer |
+| `Months_Inactive_12_mon` | The number of months the customer has been inactive over the past 12 months |
+| `Contacts_Count_12_mon` | The number of contacts with the bank in the last 12 months |
+| `Credit_Limit` | The credit limit on a customer's credit card |
+| `Total_Revolving_Bal` | The total revolving balance a customer has on their credit card |
+| `Avg_Open_To_Buy` | The mean amount of unused or available credit a customer has on their credit card or revolving credit account over a one-year period |
+| `Total_Amt_Chng_Q4_Q1` | The change in transaction amount (Q4 over Q1) |
+| `Total_Trans_Amt` | The total transaction amount over the last 12 months |
+| `Total_Trans_Ct` | The total number of transactions over the last 12 months |
+| `Total_Ct_Chng_Q4_Q1` | The change in the number of transactions (Q4 over Q1) |
+| `Avg_Utilization_Ratio` | The credit card utilisation ratio, which is the percentage of a customer's revolving credit that they use |
 
 ## Business Requirements
 
@@ -33,11 +59,41 @@
 * Did the data limit you, and did you use an alternative approach to meet these challenges?
 * How did you use generative AI tools to help with ideation, design thinking and code optimisation?
 
-## Ethical considerations (optional)
+## Generative AI
 
-* Feel free to delete this section if this is a data visualisation only (unit 1 or 2) project submission.
-* Were there any data privacy, bias or fairness issues with the data?
-* How did you overcome any legal or societal issues?
+* I very much wanted to solidify what I'd learned myself when completing this project, so treated AI as an "assistant" to support specific troubleshooting issues or processes I was unfamiliar with. Examples of when I did this are outlined in my project under *"Troubleshooting Issues"* and *"Notes on Process"*.
+
+## Ethical Considerations
+
+* Any ethical considerations I made at key instances in my project have been clearly outlined in Markdown cells labelled as *Ethical Considerations*.
+
+### Data Privacy and Anonymisation
+* Customer-identifying information was anonymised at the beginning of this project (in **Stage 1 - Anonymisation**) with salting and hashing applied to the `CLIENTNUM` values before any analysis took place. This meant that no individual customer could be re-identified from the dataset used in this project, particularly given the additional step I made to `.gitignore` the original, non-anonymised file.
+
+### Protected Characteristics and Direct Discrimination Risk
+* The original dataset included several protected characteristics under the UK Equality Act 2010. I chose to deliberately exclude these from the list of features used to train the predictive models in **Stage 4 - Machine Learning**. Even though, as I outlined in a *Ethical Considerations* section in this notebook, this predictive model is for educational purposes only and should not be used on real customer data, I felt that it was important that we should not be using legally protected characteristics for any model used to determine which customers should receive differentiated treatment.
+
+### Proxy Bias
+* This is a major topic within banking machine learning. Even if you exclude protected characteristics from a model, there might be correlations that allow a model to essentially develop biases without explicitly being trained with these characteristics as features.
+* In my project, I have acknowledged this limitation but have not been able to deliver a full audit: for instance, I know that I could perform disparate impact testing on different demographic subgroups - however, this felt out of reach as a possibility given the timeframe and also where my current skill levels sit, particularly with regards to machine learning. It would be very much something I'd like to learn about in the future. 
+
+### Encoding Choices
+* In **Stage 4 - Machine Learning**, I made the decision *not* to ordinally encode features like `Education_Level` and `Income_Category`. The reason I did this (and simply one-hot encoded them) is because I thought that to do so would impose biases around education attainment and income. I didn't think it was right to introduce a ranking that suggested that being in one category was "better" than another.
+
+## Legal and Social Implications
+
+### GDPR and Data Protection
+* As I already mentioned in my **Ethical Considerations** section above, I already chose to analyse the dataset for PII and to anonymise the `CLIENTNUM` values to ensure that any customer could not be re-identified. 
+* Under **Recital 26** of GDPR, data is classed as anonymous if re-identification is not "reasonably likely" and the transformation of the data from personal to anonymous must be permanent and irreversible - I hope that within the context of my project I have done this by ensuring the original raw dataset is excluded from my GitHub repository and cannot be called by running any of the Jupyter Notebooks. In reality, the raw dataset *is* available on Kaggle, but I wanted to ensure that my project handled the data as sensitively as possible.
+
+### Social Implications
+* Attrition models risk compounding existing financial vulnerabilities rather than just identifying them. Customers that have lower incomes or higher revolving balances may be more likely to be flagged by a model. However, these are the customers who most need access to banking services, support and fair treatment. The real-world impact of "model optimising" might be deprioritising customers that a bank has the strongest social responsibility towards. 
+* How a prediction is used matters. For example, offering a customer a helpful retention benefit is very different from reducing their services, increasing fees, or restricting access because a model predicts they are likely to leave. Targeting vulnerable customers with aggressive marketing, higher-cost products, or incentives that encourage additional borrowing can cause harm.
+
+### Scope and Limitations
+* This project is explicitly educational in nature.
+* **It has not been validated for, nor is it intended for, real-world deployment**. 
+* Any real-world application of a similar predictor would need formal fairness auditing, legal review under UK GDPR and also the UK Equality Act 2010 and oversight mechanisms that have not been implemented as part of this educational project.
 
 ## Dashboard Design (optional)
 
@@ -46,6 +102,8 @@
 * Later, during project development, you may revisit your dashboard plan to update a feature (for example, at the beginning of the project, you were confident you would use a given plot to display an insight, but later you used another plot type).
 * How were data insights communicated to technical and non-technical audiences?
 * Explain how the dashboard was designed to communicate complex data insights to different audiences. 
+
+![Dashboard Wireframe](images/dashboard-wireframe-bank-churners.png)
 
 ## Unfixed Bugs
 
