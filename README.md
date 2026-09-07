@@ -226,7 +226,7 @@ This project explores what drives customer attrition at a bank, using explorator
 
 ## Unfixed Bugs
 
-* In the three Jupyter Notebooks, I have found that sometimes the visualisations don't show up if you click *Run All*. If this happens, please manually run the cell again and the plots should appear.
+* In the Jupyter Notebooks, I have found that sometimes the visualisations don't show up if you click *Run All*. If this happens, please manually run the cell again and the plots should appear.
 
 ## Development Roadmap and Reflection on Learning Journey
 
@@ -292,16 +292,17 @@ This project explores what drives customer attrition at a bank, using explorator
 * In all sections, I have included Markdown cells entitled *Troubleshooting Issues* and *Notes on Process*: where I have used blogposts/ articles, official documentation or generative AI to support me in troubleshooting issues or in assisting me to complete a process I might not have seen before, I have included references to this within the notebooks themselves in these cells. However, please see below for a full list of credits.
 
 ### Stage 1 - Anonymise
-* Medium.com - [Pandas Move Column to Front](https://medium.com/@amit25173/pandas-move-column-to-front-3-simple-steps-to-organize-your-dataframe-99bf1f2d39aa)
-* Medium.com - [Anonymise Sensitive Data in a Pandas DataFrame Column with hashlib](https://medium.com/data-science/anonymise-sensitive-data-in-a-pandas-dataframe-column-with-hashlib-8e7ef397d91f)
-* I used **Microsoft Copilot's inline suggestions** to support me in writing the lines of code with `os.getenv`.
+* The following articles from Medium.com:
+    * [Pandas Move Column to Front](https://medium.com/@amit25173/pandas-move-column-to-front-3-simple-steps-to-organize-your-dataframe-99bf1f2d39aa)
+    * [Anonymise Sensitive Data in a Pandas DataFrame Column with hashlib](https://medium.com/data-science/anonymise-sensitive-data-in-a-pandas-dataframe-column-with-hashlib-8e7ef397d91f)
+* I used Microsoft Copilot's inline suggestions to support me in writing the lines of code with `os.getenv`.
 
 ### Stage 2 - ETL
 * The write-up of **Core Statistical Concepts** came from learnings taken from the LMS.
 * Credit to Rory from Code Institute for the **D-I-S-H** acronym and for taking us through a step-by-step process for ETL, particularly with regards to IQR analysis for handling outliers.
 
 ### Stage 3 - Visualisation
-* The following Stack Overflow forms were incredibly helpful for this section:
+* The following Stack Overflow forums were incredibly helpful for this section:
     * [How to change the colours of a Q-Q plot](https://stackoverflow.com/questions/37463189/change-marker-style-color-in-python-probplot)
     * [How to rotate x-tick labels](https://stackoverflow.com/questions/10998621/rotate-axis-tick-labels)
     * [Countplot with normalised y-axis per group](https://stackoverflow.com/questions/34615854/countplot-with-normalized-y-axis-per-group)
@@ -330,5 +331,5 @@ This project explores what drives customer attrition at a bank, using explorator
 
 ## Acknowledgements
 
-* Thank you to everyone from the Code Institute team who have been instrumental in my learning throughout this course. I feel very grateful to have had the opportunity to have learnt so much and in what feels like such a short amount of time.
+* Thank you to everyone from the Code Institute team who have been instrumental in my learning throughout this course. I feel very grateful to have had the opportunity to have learnt so much in what feels like such a short amount of time.
 * Thanks to my great cohort!
