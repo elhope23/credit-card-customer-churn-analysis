@@ -230,7 +230,7 @@ This project explores what drives customer attrition at a bank, using explorator
 
 ## Development Roadmap and Reflection on Learning Journey
 
-* I am incredibly proud of the learning journey I have had over the course of the last four months and it feels incredibly surreal to think that I have actually put this final capstone project together. What has been nice about this final one is that I can see learnings taken from the subsequent two projects have been amalgamated in this final one. 
+* I am incredibly proud of the learning journey I have had over the course of the last four months and at the start of this course I wouldn't have imagined I could have put a project like this together. What has been nice about this final one is that I can see learnings taken from the previous two projects have been amalgamated in this final one. 
 
 ### Machine Learning
 * I was able to see a real improvement in my own understanding of how to develop a pipeline, fit it, and then evaluate the results. 
