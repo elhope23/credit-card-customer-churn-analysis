@@ -46,9 +46,9 @@ This project aims to analyse the factors contributing to whether a bank's credit
 
 | **Business Requirement** | **Description** | **How is it addressed in the project?** |
 | ------------------------ | --------------- | --------------------- |
-| **Understand customer spending and engagement behaviour** | The bank will need to understand customer spending and engagement habits in order to identify any customers who are disengaged (which could be linked to attrition) | This is addressed in **Hypothesis 1**, which tests the correlation of transaction amount and transaction count, alongside exploratory data analysis, which identifies different patterns for existing and attrited customers |
-| **Determine whether financial factors influence attrition** | The bank needs to know whether customer attrition is linked to broader factors like a customer's income bracket to understand who might be at risk | This is addressed in **Hypothesis 2** |
-| **Identify behavioural warning signs that precede attrition** | The bank needs to know if there are indicators in how a customer acts that might suggest they are likely to leave - for instance, the amount owed on a credit card that is unpaid at the end of the billing cyclce (Revolving Balance) | This is addressed in **Hypothesis 3** |
+| **BR1 - Understand customer spending and engagement behaviour** | The bank will need to understand customer spending and engagement habits in order to identify any customers who are disengaged (which could be linked to attrition) | This is addressed in **Hypothesis 1**, which tests the correlation of transaction amount and transaction count, alongside exploratory data analysis, which identifies different patterns for existing and attrited customers |
+| **BR2 - Determine whether financial factors influence attrition** | The bank needs to know whether customer attrition is linked to broader factors like a customer's income bracket to understand who might be at risk | This is addressed in **Hypothesis 2** |
+| **BR3 - Identify behavioural warning signs that precede attrition** | The bank needs to know if there are indicators in how a customer acts that might suggest they are likely to leave - for instance, the amount owed on a credit card that is unpaid at the end of the billing cyclce (Revolving Balance) | This is addressed in **Hypothesis 3** |
 
 ## Hypotheses
 
@@ -73,10 +73,6 @@ This project aims to analyse the factors contributing to whether a bank's credit
 * Outline the high-level steps taken for the analysis.
 * How was the data managed throughout the collection, processing, analysis and interpretation steps?
 * Why did you choose the research methodologies you used?
-
-## The rationale to map the business requirements to the Data Visualisations
-
-* List your business requirements and a rationale for mapping them to the Data Visualisations
 
 ## Analysis techniques used
 
@@ -121,48 +117,100 @@ This project aims to analyse the factors contributing to whether a bank's credit
 * **It has not been validated for, nor is it intended for, real-world deployment**. 
 * Any real-world application of a similar predictor would need formal fairness auditing, legal review under UK GDPR and also the UK Equality Act 2010 and oversight mechanisms that have not been implemented as part of this educational project.
 
-## Dashboard Design (optional)
+## Dashboard Design
 
-* Feel free to delete this section if this is a data visualisation only (unit 1 or 2) project submission.
-* List all dashboard pages and their content, either blocks of information or widgets, like buttons, checkboxes, images, or any other item that your dashboard library supports.
-* Later, during project development, you may revisit your dashboard plan to update a feature (for example, at the beginning of the project, you were confident you would use a given plot to display an insight, but later you used another plot type).
-* How were data insights communicated to technical and non-technical audiences?
-* Explain how the dashboard was designed to communicate complex data insights to different audiences. 
+* When ideating the dashboard design for this project, and given the requirement to communicate to both general *and* technical audience bases, I decided to create two linked dashboards that could serve different audiences. Dashboard 1 presents key findings for a general audience and Dashboard 2 builds on these findings, providing full statistical detail for a technical audience. 
+
+* To ensure Dashboard 2 isn't completely inaccessible for a general audience, I have included a *WHAT DOES THIS MEAN?* section at the bottom of each hypothesis section to explain what the statistical results mean.
+
+### Dashboard Wireframe
 
 ![Dashboard Wireframe](images/dashboard-wireframe-bank-churners.png)
 
+### Data Visualisations
+
+* In the table below, I have outlined how the dashboards relate to each other and the business requirements for this project.
+
+| **Business Requirement** | **Dashboard 1 (General Audience)** | **Dashboard 2 (Technical Audience)** |
+| ------------------------ | ---------------------------------- | ------------------------------------ |
+| **Business Problem** | KPI Card and Pie Chart | --- |
+| **BR1 - Understand customer spending and engagement behaviour** | Scatterplot: Transaction Amount vs Transaction Count | Scatterplot with Linear Trend Lines: Transaction Amount vs Transaction Count (**H1**) |
+| **BR2 - Determine whether financial factors influence attrition** | Countplot: Number of Attrited Customers per Income Category | Proportional Stacked Bar Chart: Attrited vs Existing Customers per Income Category (**H2**) |
+| **BR3 - Identify behavioural warning signs that precede attrition** | Text Table: Average Total Revolving Balance | Boxplots: Revolving Balances of Attrited vs Existing Customers (**H3**) |
+
+### Rationale: Choice of Data Visualisations for Business Requirements
+
+#### **Dashboard 1 - Overview (for a non-technical audience)**
+
+| **Visualisation** | **Requirement Addressed** | **Rationale** |
+| ----------------- | ------------------------- | ------------- |
+| **KPI Card: Attrited customers** | Establishes the scale of the business problem - 16% of customers have left the bank | The headline attrition rate is a really important number in the project because the number justifies the business need in the first place. I chose a KPI card because it doesn't need interpretation, which is appropriate for a non-technical audience. |
+| **Pie Chart: Attrited vs Existing Customers** | Establishes the scale of the business problem. | When paired with the KPI card, the pie chart gives the audience a sense of the proportionality between the existing and attrited customers. |
+| **Scatterplot: Transaction Amount vs Transaction Count** | This addresses the first business requirement: understanding customer spending and engagement. | A scatterplot means we can visualise engagement at a customer level. Colour-coding the scatterplot by `Attrition_Flag` will allow a non-technical audience to visually notice that attrited customers tend to cluster lower with needing a statistical explanation. |
+| **Countplot: Number of Attrited Customers per Income Category** | This addresses the second business requirement: determining whether financial factors influence attrition. | I chose a countplot because it would give a non-technical audience a clear sense of any concentration of attrited customers in specific income categories in straightforward terms (number of) rather than as a statistical proportion. |
+| **Text Table: Average Total Revolving Balance** | This looks at the third business requirement: identifying behavioural warning signs before a customer leaves. | A simple table was chosen over a chart here because the finding is best communicated via a simple, single-number average. This is appropriate for a non-technical audience because it is direct and unambiguous. |
+
+#### **Dashboard 2 - Statistical Insights (for a more technical audience)**
+
+| **Visualisation** | **Requirement Addressed** | **Rationale** |
+| ----------------- | ------------------------- | ------------- |
+| **Scatterplot with Linear Trend Lines: Transaction Amount vs Transaction Count** | This addresses the first business requirement (tested formally in Hypothesis 1) | I decided to use the same scatterplot that was used in Dahsboard 1 to keep consistency and to help with comparability. I added linear trend lines (one per `Attrition_Flag` group) to give a technical audience a visual guide that supports the correlation test coefficients being reported (r and rho). |
+| **Proportional Stacked Bar Chart: Attrited vs Existing Customers per Income Category** | This addresses the second business requirement (tested formally in Hypothesis 2) | For a more technical audience, I chose a stacked proportional bar chart over a simple countplot because this is a closer representation of what we tested when performing the Chi-Squared Test, which is looking at association. It acts a direct visualisation of the association between existing and attrited customers that we found when performing the statistical test and returning Cramer's V. |
+| **Boxplots: Revolving Balances of Attrited vs Existing Customers** | This addresses the third business requirement (tested formally in Hypothesis 3) | The boxplots give a technical audience the full distribution detail behind the results found by carrying out the Mann-Whitney U Test. For a technical audience, being able to communicate the pronounced skew towards $0.00 for attrited customers is a really important takeaway. |
+
+### Dashboard Deployment
+
+* The link to the dashboard created in Tableau can be found here: [Credit Card Customers Churn Analysis Dashboard](https://public.tableau.com/app/profile/ellie.hope/viz/credit-card-customer-churn-analysis/Dashboard1-Overview)
+
 ## Unfixed Bugs
 
-* Please list any unfixed bugs and explain why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a significant variable to consider, paucity of time and difficulty understanding implementation are not valid reasons to leave bugs unfixed.
-* Did you recognise gaps in your knowledge, and how did you address them?
-* If applicable, include evidence of feedback received (from peers or instructors) and how it improved your approach or understanding.
+* In the three Jupyter Notebooks, I have found that sometimes the visualisations don't show up if you click *Run All*. If this happens, please manually run the cell again and the plots should appear.
 
 ## Development Roadmap
 
 * What challenges did you face, and what strategies were used to overcome these challenges?
 * What new skills or tools do you plan to learn next based on your project experience? 
 
-## Deployment (optional)
-
-* If this is a Unit 3 Streamlit, Power BI or Tableau Public project, then you can include a link here and explain how you hosted the dashboard.
-
-### Heroku (optional)
-
-* This section is necessary only if you are deploying a Streamlit app to Heroku as part of your submission for units 2 and 3. 
-* The App live link is: https://YOUR_APP_NAME.herokuapp.com/ 
-* Set the `.python-version` Python version to a [Heroku-22](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack currently supported version.
-* The project was deployed to Heroku using the following steps.
-
-1. Log in to Heroku and create an App
-2. From the Deploy tab, select GitHub as the deployment method.
-3. Select your repository name and click Search. Once it is found, click Connect.
-4. Select the branch you want to deploy, then click Deploy Branch.
-5. The deployment process should happen smoothly if all deployment files are fully functional. Click the button Open App at the top of the page to access your App.
-6. If the slug size is too large, then add large files not required for the app to the `.slugignore` file.
-
 ## Main Data Analysis Libraries
 
-* Here you should list the libraries you used in the project and provide an example(s) of how you used these libraries.
+### Stage 1 - Anonymise
+* os
+* pandas
+* hashlib
+* python-dotenv
+
+### Stage 2 - ETL
+* os
+* numpy
+* pandas
+* matplotlib
+    * .pyplot
+* seaborn
+
+### Stage 3 - EDA and Visualisation
+* os
+* numpy
+* pandas
+* matplotlib
+    * .pyplot
+* seaborn
+* pinguoin
+* scipy
+
+### Stage 4 - Machine Learning
+* os
+* numpy
+* pandas
+* matplotlib
+    * .pyplot
+* seaborn
+* sklearn
+    * .pipeline - Pipeline
+    * .compose - ColumnTransformer
+    * .preprocessing - OneHotEncoder, StandardScaler
+    * .linear_model - LogisticRegression
+    * .ensemble - RandomForestClassifier
+    * .metrics - accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 
 ## Credits
 
