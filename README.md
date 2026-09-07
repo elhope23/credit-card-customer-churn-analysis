@@ -1,6 +1,8 @@
 # CREDIT CARD CUSTOMER CHURN ANALYSIS
 
-This project aims to analyse the factors contributing to whether a bank's credit card customer will churn or not. Beyond that, this project aims to present ethical considerations as a key component of this analysis.
+This project explores what drives customer attrition at a bank, using exploratory data analysis, hypothesis testing and machine learning to identify key patterns of behaviour to predict at-risk customers. Beyond the technical analysis, this project aims to present ethical considerations as a key component of the analysis. The findings for this project are presented in a two-part dashboard, aimed to be accessible for both general and technical audiences.
+
+* Project Dashboard: [Credit Card Customers Churn Analysis Dashboard](https://public.tableau.com/app/profile/ellie.hope/viz/credit-card-customer-churn-analysis/Dashboard1-Overview)
 
 # ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
@@ -99,47 +101,47 @@ This project aims to analyse the factors contributing to whether a bank's credit
 ## Analysis techniques used
 
 ### Stage 1 - Anonymise
-    * Hashing and Salting: Applied salt and SHA-256 hashing to client numbers to anonymise the dataset before analysis.
+* Hashing and Salting: Applied salt and SHA-256 hashing to client numbers to anonymise the dataset before analysis.
 
-* **Stage 2 - ETL**
-    * Descriptive Statistics: analysed the mean, median, standard deviation of numerical columns using `.describe()`.
-    * Data Preparation: changed the data types of specific columns and carried out categorical column cleaning.
-    * Visualisation: visualised numerical columns with seaborn boxplots and histograms.
-    * IQR Analysis: identified and handled outliers in numerical columns by investigating the interquartile ranges.
-    * Feature Engineering: created a new binary column `Attrition_Flag_Binary` ready for ML modelling. 
+### Stage 2 - ETL
+* Descriptive Statistics: analysed the mean, median, standard deviation of numerical columns using `.describe()`.
+* Data Preparation: changed the data types of specific columns and carried out categorical column cleaning.
+* Visualisation: visualised numerical columns with seaborn boxplots and histograms.
+* IQR Analysis: identified and handled outliers in numerical columns by investigating the interquartile ranges.
+* Feature Engineering: created a new binary column `Attrition_Flag_Binary` ready for ML modelling. 
 
-* **Stage 3 - EDA and Visualisation**
-    * Descriptive Statistics: analysed the mean and median of customers' revolving balances by attrition status (existing or attrited customer).
-    * Normal Distribution Testing: performed Shapiro-Wilk test (with `pinguoin`) and used Q-Q plots.
-    * Hypothesis Testing: carried out different statistical tests (Spearman and Pearson correlation tests, Mann-Whitney U test and Chi-Squared test) and assessed the appropriate coefficient (rho, r, RBC, Cramer's V) alongside the p-value to reject or uphold the null hypothesis in each case.
-    * Visualisation: created a number of visualisation types to assist in exploratory data analysis and hypothesis testing:
-        * countplot
-        * pie chart
-        * proportion bar chart
-        * scatterplot
-        * Q-Q plot
-        * regplot (linear and LOWESS)
-        * histogram
+### Stage 3 - EDA and Visualisation
+* Descriptive Statistics: analysed the mean and median of customers' revolving balances by attrition status (existing or attrited customer).
+* Normal Distribution Testing: performed Shapiro-Wilk test (with `pinguoin`) and used Q-Q plots.
+* Hypothesis Testing: carried out different statistical tests (Spearman and Pearson correlation tests, Mann-Whitney U test and Chi-Squared test) and assessed the appropriate coefficient (rho, r, RBC, Cramer's V) alongside the p-value to reject or uphold the null hypothesis in each case.
+* Visualisation: created a number of visualisation types to assist in exploratory data analysis and hypothesis testing:
+    * countplot
+    * pie chart
+    * proportion bar chart
+    * scatterplot
+    * Q-Q plot
+    * regplot (linear and LOWESS)
+    * histogram
 
-* **Stage 4 - ML**
-    * Classification Models: trained and compared two classification models to see which was most effective in predicting the target variable `Attrition_Flag_Binary`.
-        * Logistic Regression: supervised machine learning algorithm used when the target is one of two possible values (in our case, `1` (Attrited Customer) or `0` (Existing Customer)).
-        * Random Forest Classification: a collection of Decision Trees, which are non-linear models that capture threshold effects (where the effect suddenly kicks in) and interactions between features (when the effect of one variable depends on the value of another)
-    * Train Test Split: I split the dataset into training and test sets using `scikit-learn`.
-    * Preprocessing: for each mode, I used `ColumnTransformer` to apply different preprocessing steps to different features
-        * `OneHotEncoder` for categorical features
-        * `StandardScaler` was used to standardise numerical features
-    * Pipeline: combined the preprocessing step with one of the models in a pipeline, before fitting this pipeline to the training data
-    * Hyperparameters: added hyperparameters to the Random Forest Classification model to prevent overfitting (explained in more detail in **Stage 4 - ML**)
-        * `class_weight="balanced"`
-        * `max_depth`
-        * `min_samples_leaf`
-        * `min_samples_split`
-    * Evaluation: evaluated each model using four metrics (explained in more detail in **Stage 4 - ML**)
-        * Accuracy
-        * Recall
-        * Precision
-        * F1 Score
+### Stage 4 - ML
+* Classification Models: trained and compared two classification models to see which was most effective in predicting the target variable `Attrition_Flag_Binary`.
+    * Logistic Regression: supervised machine learning algorithm used when the target is one of two possible values (in our case, `1` (Attrited Customer) or `0` (Existing Customer)).
+    * Random Forest Classification: a collection of Decision Trees, which are non-linear models that capture threshold effects (where the effect suddenly kicks in) and interactions between features (when the effect of one variable depends on the value of another)
+* Train Test Split: I split the dataset into training and test sets using `scikit-learn`.
+* Preprocessing: for each mode, I used `ColumnTransformer` to apply different preprocessing steps to different features
+    * `OneHotEncoder` for categorical features
+    * `StandardScaler` was used to standardise numerical features
+* Pipeline: combined the preprocessing step with one of the models in a pipeline, before fitting this pipeline to the training data
+* Hyperparameters: added hyperparameters to the Random Forest Classification model to prevent overfitting (explained in more detail in **Stage 4 - ML**)
+    * `class_weight="balanced"`
+    * `max_depth`
+    * `min_samples_leaf`
+    * `min_samples_split`
+* Evaluation: evaluated each model using four metrics (explained in more detail in **Stage 4 - ML**)
+    * Accuracy
+    * Recall
+    * Precision
+    * F1 Score
 
 ## Generative AI
 
