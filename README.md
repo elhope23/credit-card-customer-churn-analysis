@@ -1,4 +1,4 @@
-# Project XYZ
+# CREDIT CARD CUSTOMER CHURN ANALYSIS
 
 This project aims to analyse the factors contributing to whether a bank's credit card customer will churn or not. Beyond that, this project aims to present ethical considerations as a key component of this analysis.
 
@@ -76,14 +76,51 @@ This project aims to analyse the factors contributing to whether a bank's credit
 
 ## Analysis techniques used
 
-* List the data analysis methods used and explain limitations or alternative approaches.
-* How did you structure the data analysis techniques? Justify your response.
-* Did the data limit you, and did you use an alternative approach to meet these challenges?
-* How did you use generative AI tools to help with ideation, design thinking and code optimisation?
+### Stage 1 - Anonymise
+    * Hashing and Salting: Applied salt and SHA-256 hashing to client numbers to anonymise the dataset before analysis.
+
+* **Stage 2 - ETL**
+    * Descriptive Statistics: analysed the mean, median, standard deviation of numerical columns using `.describe()`.
+    * Data Preparation: change the data types of columns and carried out categorical column cleaning.
+    * Visualisation: performed a quick visualisation of numerical columns with seaborn boxplots and histoplots.
+    * IQR Analysis: identified and handled outliers in numerical columns by investigating the interquartile ranges.
+    * Feature Engineering: Extracted new feature columns, `final_grade_category` and `final_grade_category`.
+
+* **Stage 3 - EDA and Visualisation**
+    * Descriptive Statistics: analysed the mean and median of final exam scores by part-time jobs status.
+    * Normal Distribution Testing: performed Shapiro-Wilk test and Henze-Zirkler test for bivariate normal (both with `pinguoin`).
+    * Hypothesis Testing: carried out different statistical tests (Spearman and Pearson correlation tests, Mann-Whitney U test and Chi-Squared test) and assessed the appropriate coefficient (rho, r, RBC, Cramer's V) alongside the p-value to reject or uphold the null hypothesis in each case.
+    * Visualisation: created a number of visualisation types to assist in exploratory data analysis and hypothesis testing:
+        * countplot
+        * pie chart
+        * boxplot
+        * heatmap
+        * regplot
+        * histogram
+
+* **Stage 4 - ML**
+    * Classification Models: trained and compared two classification models to see which was most effective in predicting the target variable `Attrition_Flag_Binary`.
+        * Logistic Regression: supervised machine learning algorithm used when the target is one of two possible values (in our case, `1` (Attrited Customer) or `0` (Existing Customer)).
+        * Random Forest Classification: a collection of Decision Trees, which are non-linear models that capture threshold effects (where the effect suddenly kicks in) and interactions between features (when the effect of one variable depends on the value of another)
+    * Train Test Split: I split the dataset into training and test sets using `scikit-learn`.
+    * Preprocessing: for each mode, I used `ColumnTransformer` to apply different preprocessing steps to different features
+        * `OneHotEncoder` for categorical features
+        * `StandardScaler` was used to standardise numerical features
+    * Pipeline: combined the preprocessing step with one of the models in a pipeline, before fitting this pipeline to the training data
+    * Hyperparameters: added hyperparameters to the Random Forest Classification model to prevent overfitting (explained in more detail in **Stage 4 - ML**)
+        * `class_weight="balanced"`
+        * `max_depth`
+        * `min_samples_leaf`
+        * `min_samples_split`
+    * Evaluation: evaluated each model using four metrics (explained in more detail in **Stage 4 - ML**)
+        * Accuracy
+        * Recall
+        * Precision
+        * F1 Score
 
 ## Generative AI
 
-* I very much wanted to solidify what I'd learned myself when completing this project, so treated AI as an "assistant" to support specific troubleshooting issues or processes I was unfamiliar with. Examples of when I did this are outlined in my project under *"Troubleshooting Issues"* and *"Notes on Process"*.
+* I very much wanted to solidify what I'd learned myself when completing this project, so treated AI as an "assistant" to support specific troubleshooting issues or processes I was unfamiliar with. Examples of when I did this are outlined in my project under *Troubleshooting Issues* and *Notes on Process*.
 
 ## Ethical Considerations
 
@@ -154,8 +191,8 @@ This project aims to analyse the factors contributing to whether a bank's credit
 
 | **Visualisation** | **Requirement Addressed** | **Rationale** |
 | ----------------- | ------------------------- | ------------- |
-| **Scatterplot with Linear Trend Lines: Transaction Amount vs Transaction Count** | This addresses the first business requirement (tested formally in Hypothesis 1) | I decided to use the same scatterplot that was used in Dahsboard 1 to keep consistency and to help with comparability. I added linear trend lines (one per `Attrition_Flag` group) to give a technical audience a visual guide that supports the correlation test coefficients being reported (r and rho). |
-| **Proportional Stacked Bar Chart: Attrited vs Existing Customers per Income Category** | This addresses the second business requirement (tested formally in Hypothesis 2) | For a more technical audience, I chose a stacked proportional bar chart over a simple countplot because this is a closer representation of what we tested when performing the Chi-Squared Test, which is looking at association. It acts a direct visualisation of the association between existing and attrited customers that we found when performing the statistical test and returning Cramer's V. |
+| **Scatterplot with Linear Trend Lines: Transaction Amount vs Transaction Count** | This addresses the first business requirement (tested formally in Hypothesis 1) | I decided to use the same scatterplot that was used in Dashboard 1 to keep consistency and to help with comparability. I added linear trend lines (one per `Attrition_Flag` group) to give a technical audience a visual guide that supports the correlation test coefficients being reported (r and rho). |
+| **Proportional Stacked Bar Chart: Attrited vs Existing Customers per Income Category** | This addresses the second business requirement (tested formally in Hypothesis 2) | For a more technical audience, I chose a stacked proportional bar chart over a simple countplot because this is a closer representation of what we tested when performing the Chi-Squared Test, which is looking at association. It acts as a direct visualisation of the association between existing and attrited customers that we found when performing the statistical test and returning Cramer's V. |
 | **Boxplots: Revolving Balances of Attrited vs Existing Customers** | This addresses the third business requirement (tested formally in Hypothesis 3) | The boxplots give a technical audience the full distribution detail behind the results found by carrying out the Mann-Whitney U Test. For a technical audience, being able to communicate the pronounced skew towards $0.00 for attrited customers is a really important takeaway. |
 
 ### Dashboard Deployment
@@ -166,10 +203,23 @@ This project aims to analyse the factors contributing to whether a bank's credit
 
 * In the three Jupyter Notebooks, I have found that sometimes the visualisations don't show up if you click *Run All*. If this happens, please manually run the cell again and the plots should appear.
 
-## Development Roadmap
+## Development Roadmap and Reflection on Learning Journey
 
-* What challenges did you face, and what strategies were used to overcome these challenges?
-* What new skills or tools do you plan to learn next based on your project experience? 
+* I am incredibly proud of the learning journey I have had over the course of the last four months and it feels incredibly surreal to think that I have actually put this final capstone project together. What has been nice about this final one is that I can see learnings taken from the subsequent two projects have been amalgamated in this final one. 
+
+### Machine Learning
+* I was able to see a real improvement in my own understanding of how to develop a pipeline, fit it, and then evaluate the results. 
+* I am really pleased because this time around I was able to identify an issue (the Random Forest model was initially overfitted) and alter the preprocessing steps with hyperparameters to achieve better model performance the second time around.
+
+### Ethical Considerations
+* I found applying an ethics lens to this project a really interesting exercise and I am keen to continue to learn about ethics and legal considerations in data analytics moving forwards.
+* I also really enjoyed picking up the salting and hashing techniques I learnt about in the first project and applying them here.
+
+### Challenges Faced and How I Overcame
+* I do not come from a background in Finance, so there was a lot of learning that needed to take place into what the columns actually meant before I could go ahead and analyse (it is essential that you know your data!). I found this process really enjoyable, because it meant I gained knowledge in a new field that I might be able to apply in future.
+* In comparison to the last dataset, this one contained far more variables. This brought up two main challenges that I had to overcome:
+    * Picking a focus: it was critical that I ensured the project and the resulting dashboard told a story and I didn't simply choose things to analyse at random. With the dashboards, I made a concerted effort to reflect information that was only related to my original business requirements.
+    * Quantity: The way I have tackled sections is quite lengthy, often tackling each individual column separately (for instance, the **Handle Outliers** section in (**Stage 2 - ETL**). In future, I would like to get better at combining analysis steps to streamline the project).
 
 ## Main Data Analysis Libraries
 
@@ -214,22 +264,46 @@ This project aims to analyse the factors contributing to whether a bank's credit
 
 ## Credits
 
-* In this section, you need to reference where you got your content, media and extra help from. It is common practice to use code from other repositories and tutorials; however, it is important to be very specific about these sources to avoid plagiarism. 
-* You can break the credits section into Content and Media, depending on what you include in your project. 
+* In all sections, I have included Markdown cells entitled *Troubleshooting Issues* and *Notes on Process*: where I have used blogposts/ articles, official documentation or generative AI to support me in troubleshooting issues or in assisting me to complete a process I might not have seen before, I have included references to this within the notebooks themselves in these cells. However, please see below for a full list of credits.
 
-### Content 
+### Stage 1 - Anonymise
+* Medium.com - [Pandas Move Column to Front](https://medium.com/@amit25173/pandas-move-column-to-front-3-simple-steps-to-organize-your-dataframe-99bf1f2d39aa)
+* Medium.com - [Anonymise Sensitive Data in a Pandas DataFrame Column with hashlib](https://medium.com/data-science/anonymise-sensitive-data-in-a-pandas-dataframe-column-with-hashlib-8e7ef397d91f)
+* I used **Microsoft Copilot's inline suggestions** to support me in writing the lines of code with `os.getenv`.
 
-- The text for the Home page was taken from the Wikipedia Article A
-- Instructions on how to implement form validation were taken from a [Specific YouTube Tutorial](https://www.youtube.com/)
-- The icons in the footer were taken from [Font Awesome](https://fontawesome.com/)
+### Stage 2 - ETL
+* The write-up of **Core Statistical Concepts** came from learnings taken from the LMS.
+* Credit to Rory from Code Institute for the **D-I-S-H** acronym and for taking us through a step-by-step process for ETL, particularly with regards to IQR analysis for handling outliers.
+
+### Stage 3 - Visualisation
+* The following Stack Overflow forms were incredibly helpful for this section:
+    * [How to change the colours of a Q-Q plot](https://stackoverflow.com/questions/37463189/change-marker-style-color-in-python-probplot)
+    * [How to rotate x-tick labels](https://stackoverflow.com/questions/10998621/rotate-axis-tick-labels)
+    * [Countplot with normalised y-axis per group](https://stackoverflow.com/questions/34615854/countplot-with-normalized-y-axis-per-group)
+    * [Display bar labels on a seaborn barplot](https://stackoverflow.com/questions/55104819/display-count-on-top-of-seaborn-barplot)
+* I consulted the following official documentation:
+    * [Matplotlib Documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.legend.html) for `.legend` to move the legend in the Gender plot to allow viewers to see the top of the bar
+    * [SciPy Shapiro Documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.shapiro.html) helped me to troubleshoot a UserWarning I got when running a Shapiro-Wilk Test (dataset was too large)
+    * [Seaborn Documentation](https://seaborn.pydata.org/generated/seaborn.move_legend.html) helped me to move the hue legend which was covering the top of my bar chart
+* Specific cases where Generative AI assisted me:
+    * Establishing the correct order for my method chaining to create proportion bar charts
+    * In finding `.pivot()` to print all proportions in a table (printing values on the bars in bar plots was too messy)
+    * Suggested alternative ways of ascertaining whether the data is normal - namely that of visualising the data in a Q-Q plot alongside histograms
+
+### Stage 4 - ML
+* In this section, I predominantly used the Code Institute LMS content, and must give particular credit to the instructions on how to create a pipeline with a custom method that combined the preprocessing steps and the pipeline itself.
+* Additionally, I used Generative AI (Claude Sonnet 5), to provide me with a simplified breakdown of all the steps in a machine learning pipeline to help my understanding. One of the additional tools I was able to learn about was `ColumnTransformer`.
+* In addition to what I had learned in my previous project, consulting Generative AI (Claude Sonnet 5) led me to various hyperparameters that I was able to apply to my unconstrained Random Forest model and prevent overfitting. These hyperparameters are all listed below and I have included a write-up in **Stage 4 - ML** that gives an overview of what they all do:
+    * `class_weight="balanced"`
+    * `max_depth`
+    * `min_samples_leaf`
+    * `min_samples_split`
 
 ### Media
 
-- The photos used on the home and sign-up page are from This Open-Source site
-- The images used for the gallery page were taken from this other open-source site
+* The image used in this README.md is from Code Institute.
 
+## Acknowledgements
 
-
-## Acknowledgements (optional)
-
-* Thank the people who supported this project.
+* Thank you to everyone from the Code Institute team who have been instrumental in my learning throughout this course. I feel very grateful to have had the opportunity to have learnt so much and in what feels like such a short amount of time.
+* Thanks to my great cohort!
