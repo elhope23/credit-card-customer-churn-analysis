@@ -34,6 +34,8 @@ This project aims to analyse the factors contributing to whether a bank's credit
 | `Total_Ct_Chng_Q4_Q1` | The change in the number of transactions (Q4 over Q1) |
 | `Avg_Utilization_Ratio` | The credit card utilisation ratio, which is the percentage of a customer's revolving credit that they use |
 
+* *Note*: Only the `Income_Category` column had an indication of the currency on Kaggle, but for consistency we will assume that all columns with currency values will be in $. 
+
 ## Business Requirements
 
 * This project addresses the following business problem: a bank manager has observed a rising rate of customers leaving their credit card services and wants to identify at-risk customers before they leave, so that the bank can proactively intervene with improved service and hopefully prevent the customers leaving.
@@ -66,13 +68,33 @@ This project aims to analyse the factors contributing to whether a bank's credit
 | ---- | -----|
 | **H1** | Test for Normality: Shapiro-Wilk Test, Q-Q Plot<br>Correlation Tests: Spearman and Pearson<br>Visualisation: Seaborn Regplot with Linear Regression Line and LOWESS Regression Line |
 | **H2** | Visualisation: Countplot<br>Statistical Test: Chi-Squared Test of Independence |
-| **H3** | Preliminary Descriptive Statistics: Mean and Median<br><br>Test for Normality: Q-Q Plot <br><br>Statistical Test: Mann-Whitney U Test |
+| **H3** | Preliminary Descriptive Statistics: Mean and Median<br>Test for Normality: Q-Q Plot<br>Statistical Test: Mann-Whitney U Test |
 
 ## Project Plan
 
-* Outline the high-level steps taken for the analysis.
-* How was the data managed throughout the collection, processing, analysis and interpretation steps?
-* Why did you choose the research methodologies you used?
+* In order to manage this project, I used a GitHub Project Kanban Board. 
+* This allowed me to visualise all of the steps that I had planned to deliver as part of this project. Given the tight timeframe, it proved invaluable to make sure I didn't forget things.
+* As you can see from the image below, all the planned work has been completed for this project.
+
+![Kanban Board](images/project-kanban-board.png)
+
+* I structured the board with three main workflow stages:
+    * **To Do**: The backlog section for work not yet started
+    * **In Progress**: For items actively being worked on (particularly useful section for the start of a new day!)
+    * **Done**: The work that I completed 
+
+* The key project steps I took were:
+    * **Source Dataset**
+        * Use Kaggle to search for an appropriate dataset that would allow me to write about ethical considerations
+    * **Stage 1 - Anonymise**
+        * Use salting and hashing technique to anonymise raw data and load dataset to folder: `datasets/anonymised-raw-data/`
+    * **Stage 2 - ETL**
+        * Carry out the ETL (Extraction, Transform, Load) process: change column datatypes, clean categorical columns, visualise and handle outliers, load dataset to folder: `datasets/cleaned-data/`
+    * **Stage 3 - Visualisation**
+        * EDA: analyse split between existing and attrited customers using a countplot and pie chart, plot countplots and proportion bar charts for demographic variables, plot countplot and proportion bar chart for card categories, visualise transaction behaviour on scatterplot
+        * Hypotheses Testing: use statistical tests against three hypotheses and summarise whether the null hypothesis can be rejected in each case.
+    * **Stage 4 - Machine Learning**
+        * Assess two machine learning models to see how effective they are at predicting customer attrition.
 
 ## Analysis techniques used
 
@@ -81,21 +103,22 @@ This project aims to analyse the factors contributing to whether a bank's credit
 
 * **Stage 2 - ETL**
     * Descriptive Statistics: analysed the mean, median, standard deviation of numerical columns using `.describe()`.
-    * Data Preparation: change the data types of columns and carried out categorical column cleaning.
-    * Visualisation: performed a quick visualisation of numerical columns with seaborn boxplots and histoplots.
+    * Data Preparation: changed the data types of specific columns and carried out categorical column cleaning.
+    * Visualisation: visualised numerical columns with seaborn boxplots and histograms.
     * IQR Analysis: identified and handled outliers in numerical columns by investigating the interquartile ranges.
-    * Feature Engineering: Extracted new feature columns, `final_grade_category` and `final_grade_category`.
+    * Feature Engineering: created a new binary column `Attrition_Flag_Binary` ready for ML modelling. 
 
 * **Stage 3 - EDA and Visualisation**
-    * Descriptive Statistics: analysed the mean and median of final exam scores by part-time jobs status.
-    * Normal Distribution Testing: performed Shapiro-Wilk test and Henze-Zirkler test for bivariate normal (both with `pinguoin`).
+    * Descriptive Statistics: analysed the mean and median of customers' revolving balances by attrition status (existing or attrited customer).
+    * Normal Distribution Testing: performed Shapiro-Wilk test (with `pinguoin`) and used Q-Q plots.
     * Hypothesis Testing: carried out different statistical tests (Spearman and Pearson correlation tests, Mann-Whitney U test and Chi-Squared test) and assessed the appropriate coefficient (rho, r, RBC, Cramer's V) alongside the p-value to reject or uphold the null hypothesis in each case.
     * Visualisation: created a number of visualisation types to assist in exploratory data analysis and hypothesis testing:
         * countplot
         * pie chart
-        * boxplot
-        * heatmap
-        * regplot
+        * proportion bar chart
+        * scatterplot
+        * Q-Q plot
+        * regplot (linear and LOWESS)
         * histogram
 
 * **Stage 4 - ML**
