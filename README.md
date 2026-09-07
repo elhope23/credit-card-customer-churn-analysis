@@ -36,11 +36,37 @@ This project aims to analyse the factors contributing to whether a bank's credit
 
 ## Business Requirements
 
-* Describe your business requirements
+* This project addresses the following business problem: a bank manager has observed a rising rate of customers leaving their credit card services and wants to identify at-risk customers before they leave, so that the bank can proactively intervene with improved service and hopefully prevent the customers leaving.
 
-## Hypothesis and how to validate?
+* The aim of this project is to is to:
+    * Identify which customer characteristics and behaviours are most strongly linked to attrition.
+    * Evaluate whether a predictive model can flag at-risk customers in advance.
 
-* List here your project hypothesis(es) and how you envision validating it (them) 
+* The business requirements are as follows (each linked to a hypothesis tested as part of this project):
+
+| **Business Requirement** | **Description** | **How is it addressed in the project?** |
+| ------------------------ | --------------- | --------------------- |
+| **Understand customer spending and engagement behaviour** | The bank will need to understand customer spending and engagement habits in order to identify any customers who are disengaged (which could be linked to attrition) | This is addressed in **Hypothesis 1**, which tests the correlation of transaction amount and transaction count, alongside exploratory data analysis, which identifies different patterns for existing and attrited customers |
+| **Determine whether financial factors influence attrition** | The bank needs to know whether customer attrition is linked to broader factors like a customer's income bracket to understand who might be at risk | This is addressed in **Hypothesis 2** |
+| **Identify behavioural warning signs that precede attrition** | The bank needs to know if there are indicators in how a customer acts that might suggest they are likely to leave - for instance, the amount owed on a credit card that is unpaid at the end of the billing cyclce (Revolving Balance) | This is addressed in **Hypothesis 3** |
+
+## Hypotheses
+
+* The hypotheses that will be examined are:
+
+| **Hypothesis** | **Hypothesis Description** |
+| -------------- | -------------------------- |
+| **H1** | Customers who make more transactions tend to spend more |
+| **H2** | Annual income category is linked to whether a customer leaves the bank |
+| **H3** | Customers who leave the bank have a different revolving balance than those who remain |
+
+* They will be validated as follows:
+
+| **Hypothesis** | **How to Validate** |
+| ---- | -----|
+| **H1** | Test for Normality: Shapiro-Wilk Test, Q-Q Plot<br>Correlation Tests: Spearman and Pearson<br>Visualisation: Seaborn Regplot with Linear Regression Line and LOWESS Regression Line |
+| **H2** | Visualisation: Countplot<br>Statistical Test: Chi-Squared Test of Independence |
+| **H3** | Preliminary Descriptive Statistics: Mean and Median<br><br>Test for Normality: Q-Q Plot <br><br>Statistical Test: Mann-Whitney U Test |
 
 ## Project Plan
 
